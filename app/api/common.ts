@@ -40,5 +40,5 @@ export async function requestOpenai(req: NextRequest, requestJson: any) {
     method: req.method,
     body: JSON.stringify(requestJson),
     duplex: "half",
-  });
+  } as RequestInit);
 }

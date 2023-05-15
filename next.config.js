@@ -29,12 +29,12 @@ const nextConfig = {
       beforeFiles: ret,
     };
   },
-  webpack(config, options) {
+  webpack(config, { isServer, isDev }) {
     config.module.rules.push({
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
-    if (options.isServer) {
+    if (isServer) {
       config.plugins.push(
         new CopyPlugin({
           patterns: [
@@ -42,13 +42,13 @@ const nextConfig = {
               from: `${path.dirname(
                 require.resolve(`gpt-3-encoder/package.json`)
               )}/encoder.json`,
-              to: "./app/api/openai/[...path]/",
+              to: isDev ? "./app/api/openai/[...path]/" : "",
             },
             {
               from: `${path.dirname(
                 require.resolve(`gpt-3-encoder/package.json`)
               )}/vocab.bpe`,
-              to: "./app/api/openai/[...path]/",
+              to: isDev ? "./app/api/openai/[...path]/" : "",
             },
           ],
         })
