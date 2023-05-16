@@ -1,6 +1,6 @@
-import { assert } from "console";
 import { Redis } from "ioredis";
 import { getServerSideConfig } from "../../config/server";
+import assert from "assert";
 
 const redis = new Redis(getServerSideConfig().redisUrl);
 

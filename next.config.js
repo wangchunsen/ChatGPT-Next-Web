@@ -1,8 +1,4 @@
 /** @type {import('next').NextConfig} */
-require('webpack-node-externals');
-const CopyPlugin = require('copy-webpack-plugin');
-const path = require('path');
-
 
 const nextConfig = {
   experimental: {
@@ -34,57 +30,6 @@ const nextConfig = {
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
-    if (isServer && isDev) {
-      config.plugins.push(
-        new CopyPlugin({
-          patterns: [
-            {
-              from: `${path.dirname(
-                require.resolve(`gpt-3-encoder/package.json`)
-              )}/encoder.json`,
-              to: "./app/api/openai/[...path]/",
-            },
-            {
-              from: `${path.dirname(
-                require.resolve(`gpt-3-encoder/package.json`)
-              )}/vocab.bpe`,
-              to: "./app/api/openai/[...path]/",
-            },
-          ],
-        })
-      )
-    } else if (isServer) {
-      config.plugins.push(
-        new CopyPlugin({
-          patterns: [
-            {
-              from: `${path.dirname(
-                require.resolve(`gpt-3-encoder/package.json`)
-              )}/encoder.json`,
-              to: "",
-            },
-            {
-              from: `${path.dirname(
-                require.resolve(`gpt-3-encoder/package.json`)
-              )}/encoder.json`,
-              to: "../static/chunks",
-            },
-            {
-              from: `${path.dirname(
-                require.resolve(`gpt-3-encoder/package.json`)
-              )}/vocab.bpe`,
-              to: "",
-            },
-            {
-              from: `${path.dirname(
-                require.resolve(`gpt-3-encoder/package.json`)
-              )}/vocab.bpe`,
-              to: "../static/chunks",
-            },
-          ],
-        })
-      )
-    }
     return config;
   },
   output: "standalone",

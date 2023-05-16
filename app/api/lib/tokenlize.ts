@@ -1,10 +1,4 @@
-// try {
-//     require('gpt-3-encoder')
-// } catch (e) {
-//     console.log(e)
-// }
-
-import { encode } from "gpt-3-encoder";
+import { encode } from "gpt-tokenizer";
 
 export function countToken(str: string): number {
   if (str && str.length > 0) {
