@@ -2,9 +2,7 @@ import { Redis } from "ioredis";
 import { getServerSideConfig } from "../../config/server";
 import assert from "assert";
 
-const redisUrl = getServerSideConfig().redisUrl;
-const redis = new Redis(redisUrl);
-console.log("Connect to redis ", redisUrl);
+const redis = new Redis(getServerSideConfig().redisUrl);
 
 const keyOf = (accessCode: string) => `token:${accessCode}`;
 
@@ -42,6 +40,7 @@ export async function getTokenInfo(
   accessCode: string,
 ): Promise<TokenInfo | undefined> {
   const key = keyOf(accessCode);
+  console.log("key is", key);
 
   const obj = await redis.call("JSON.GET", key, "$").then((s) => {
     if (s !== null) {

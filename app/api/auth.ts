@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 import { getServerSideConfig } from "../config/server";
-import md5 from "spark-md5";
 import { ACCESS_CODE_PREFIX } from "../constant";
 import { getTokenInfo } from "./lib/redis";
 
