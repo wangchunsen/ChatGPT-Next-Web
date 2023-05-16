@@ -40,6 +40,7 @@ export const getServerSideConfig = () => {
     proxyUrl: process.env.PROXY_URL,
     isVercel: !!process.env.VERCEL,
     hideUserApiKey: true,
-    redisUrl: process.env.REDIS_URL ?? "redis://127.0.0.1:6379",
+    redisUrl:
+      process.env.KV_URL ?? process.env.REDIS_URL ?? "redis://127.0.0.1:6379",
   };
 };

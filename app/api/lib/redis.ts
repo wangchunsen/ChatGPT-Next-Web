@@ -2,7 +2,9 @@ import { Redis } from "ioredis";
 import { getServerSideConfig } from "../../config/server";
 import assert from "assert";
 
-const redis = new Redis(getServerSideConfig().redisUrl);
+const redisUrl = getServerSideConfig().redisUrl;
+const redis = new Redis(redisUrl);
+console.log("Connect to redis ", redisUrl);
 
 const keyOf = (accessCode: string) => `token:${accessCode}`;
 
